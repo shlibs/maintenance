@@ -36,22 +36,19 @@ trap _STGNTRPSIGNAL_ HUP INT TERM
 trap _STGNTRPQUIT_ QUIT
 sed -i "s/^VERSIONID=.*/VERSIONID=$(head -n 1 .conf/VERSIONID )/g" setupTermuxArch
 sed -i "s/^FLHDR1\[5\]=.*/FLHDR1\[5\]=\"VERSIONID=$(head -n 1 .conf/VERSIONID)\"/g" printoutstatements.bash
-cp setupTermuxArch setupTermuxArch.bash
-cp setupTermuxArch setupTermuxArch.sh
-cp *sh gen/
-cp LICENSE gen/
-cp setupTermuxArch  gen/
-cp setupTermuxArch.sh  gen/
-cp setupTermuxArch.bash  gen/
-cd gen/
+GDIR="$$$RANDOM$PPID$SECONDS"
+mkdir -p gen/"$GDIR"
+cp {LICENSE,archlinuxconfig.bash,espritfunctions.bash,getimagefunctions.bash,knownconfigurations.bash,maintenanceroutines.bash,necessaryfunctions.bash,setupTermuxArch,setupTermuxArch.bash,setupTermuxArch.sh,printoutstatements.bash} gen/"$GDIR"
+cd gen/"$GDIR"
 sha512sum *sh > termuxarchchecksum.sha512
 sha512sum LICENSE >> termuxarchchecksum.sha512
 sha512sum setupTermuxArch >> termuxarchchecksum.sha512
 sha512sum -c termuxarchchecksum.sha512
 tar zcf ../setupTermuxArch.tar.gz *
 cd ..
-rm -f gen/*
-sha512sum setupTermuxArch.tar.gz > setupTermuxArch.sha512
-sha512sum -c setupTermuxArch.sha512
+rm -f gen/"$GDIR"/*sh 
+rm -f gen/"$GDIR"/LICENSE
+rm -f gen/"$GDIR"/setupTermuxArch
+rm -f gen/"$GDIR"/termuxarchchecksum.sha512
 .scripts/maintenance/do.sums.bash "$@"
 # tgen.bash EOF

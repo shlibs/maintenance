@@ -39,14 +39,14 @@ sed -i "s/^FLHDR1\[5\]=.*/FLHDR1\[5\]=\"VERSIONID=$(head -n 1 .conf/VERSIONID)\"
 GDIR="$$$RANDOM$PPID$SECONDS"
 mkdir -p gen/"$GDIR"
 cp {LICENSE,archlinuxconfig.bash,espritfunctions.bash,getimagefunctions.bash,knownconfigurations.bash,maintenanceroutines.bash,necessaryfunctions.bash,setupTermuxArch,setupTermuxArch.bash,setupTermuxArch.sh,printoutstatements.bash} gen/"$GDIR"
-printf "setupTermuxArch.bash setupTermuxArch.sh" | xargs -n 1 cp setupTermuxArch
 cd gen/"$GDIR"
 sha512sum *sh > termuxarchchecksum.sha512
 sha512sum LICENSE >> termuxarchchecksum.sha512
 sha512sum setupTermuxArch >> termuxarchchecksum.sha512
 sha512sum -c termuxarchchecksum.sha512
 tar zcf ../setupTermuxArch.tar.gz *
-rm -f {*.bash,*.sh,LICENSE,setupTermuxArch,termuxarchchecksum.sha512}
+cp setupTermuxArch* ../..
+printf "*.bash *.sh LICENSE setupTermuxArch termuxarchchecksum.sha512" | xargs -n 1 rm -f
 cd ../..
 .scripts/maintenance/do.sums.bash "$@"
 # tgen.bash EOF

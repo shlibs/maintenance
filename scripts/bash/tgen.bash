@@ -45,7 +45,7 @@ sha512sum LICENSE >> termuxarchchecksum.sha512
 sha512sum setupTermuxArch >> termuxarchchecksum.sha512
 sha512sum -c termuxarchchecksum.sha512
 tar zcf ../setupTermuxArch.tar.gz *
-cd ..
+cd ../..
 rm -f gen/"$GDIR"/*sh 
 rm -f gen/"$GDIR"/LICENSE
 rm -f gen/"$GDIR"/setupTermuxArch

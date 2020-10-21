@@ -44,9 +44,9 @@ sha512sum *sh > termuxarchchecksum.sha512
 sha512sum LICENSE >> termuxarchchecksum.sha512
 sha512sum setupTermuxArch >> termuxarchchecksum.sha512
 sha512sum -c termuxarchchecksum.sha512
-tar zcf ../setupTermuxArch.tar.gz *
-cp setupTermuxArch* ../..
-printf "*.bash *.sh LICENSE setupTermuxArch termuxarchchecksum.sha512" | xargs -n 1 rm -f
+tar zcf ../../setupTermuxArch.tar.gz *
+mv setupTermuxArch.sha512 ../..
+rm -r {*.sh,setupTermuxArch*}
 cd ../..
 .scripts/maintenance/do.sums.bash "$@"
 # tgen.bash EOF

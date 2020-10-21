@@ -43,7 +43,8 @@ cd gen/"$GDIR"
 sha512sum {*sh,LICENSE,setupTermuxArch} > termuxarchchecksum.sha512
 sha512sum -c termuxarchchecksum.sha512
 tar zcf ../../setupTermuxArch.tar.gz *
-rm -f {*.sh,setupTermuxArch*,termuxarchchecksum.sha512}
+rm -f {LICENSE,setupTermuxArch*,termuxarchchecksum.sha512}
 cd ../..
+sha512sum setupTermuxArch.tar.gz > setupTermuxArch.sha512                        sha512sum -c setupTermuxArch.sha512
 .scripts/maintenance/do.sums.bash "$@"
 # tgen.bash EOF

@@ -38,11 +38,16 @@ sed -i "s/^VERSIONID=.*/VERSIONID=$(head -n 1 .conf/VERSIONID )/g" setupTermuxAr
 sed -i "s/^FLHDR1\[5\]=.*/FLHDR1\[5\]=\"VERSIONID=$(head -n 1 .conf/VERSIONID)\"/g" printoutstatements.bash
 GDIR="$$$RANDOM$PPID$SECONDS"
 mkdir -p gen/"$GDIR"
+# copy multiple files to one destination directory
 cp {LICENSE,archlinuxconfig.bash,espritfunctions.bash,getimagefunctions.bash,knownconfigurations.bash,maintenanceroutines.bash,necessaryfunctions.bash,setupTermuxArch,setupTermuxArch.bash,setupTermuxArch.sh,printoutstatements.bash} gen/"$GDIR"
+# copy one file to multiple files
+printf "setupTermuxArch.bash setupTermuxArch.sh" | xargs -n 1 cp setupTermuxArch
 cd gen/"$GDIR"
+# generate checksum from multiple files 
 sha512sum {*sh,LICENSE,setupTermuxArch} > termuxarchchecksum.sha512
 sha512sum -c termuxarchchecksum.sha512
 tar zcf ../../setupTermuxArch.tar.gz *
+# delete multiple files 
 rm -f {LICENSE,setupTermuxArch*,termuxarchchecksum.sha512}
 cd ../..
 sha512sum setupTermuxArch.tar.gz > setupTermuxArch.sha512                        sha512sum -c setupTermuxArch.sha512

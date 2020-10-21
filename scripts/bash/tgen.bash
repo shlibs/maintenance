@@ -40,13 +40,10 @@ GDIR="$$$RANDOM$PPID$SECONDS"
 mkdir -p gen/"$GDIR"
 cp {LICENSE,archlinuxconfig.bash,espritfunctions.bash,getimagefunctions.bash,knownconfigurations.bash,maintenanceroutines.bash,necessaryfunctions.bash,setupTermuxArch,setupTermuxArch.bash,setupTermuxArch.sh,printoutstatements.bash} gen/"$GDIR"
 cd gen/"$GDIR"
-sha512sum *sh > termuxarchchecksum.sha512
-sha512sum LICENSE >> termuxarchchecksum.sha512
-sha512sum setupTermuxArch >> termuxarchchecksum.sha512
+sha512sum {*sh,LICENSE,setupTermuxArch} > termuxarchchecksum.sha512
 sha512sum -c termuxarchchecksum.sha512
 tar zcf ../../setupTermuxArch.tar.gz *
-mv setupTermuxArch.sha512 ../..
-rm -f {*.sh,setupTermuxArch*}
+rm -f {*.sh,setupTermuxArch*,termuxarchchecksum.sha512}
 cd ../..
 .scripts/maintenance/do.sums.bash "$@"
 # tgen.bash EOF

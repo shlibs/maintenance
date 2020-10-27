@@ -45,6 +45,17 @@ cp {LICENSE,archlinuxconfig.bash,espritfunctions.bash,getimagefunctions.bash,kno
 # copy one file to multiple files
 printf "setupTermuxArch.bash setupTermuxArch.sh" | xargs -n 1 cp setupTermuxArch
 cd gen/"$GDIR"
+# strip comments from multiple files 
+TASTRIP=(archlinuxconfig.bash espritfunctions.bash getimagefunctions.bash knownconfigurations.bash maintenanceroutines.bash necessaryfunctions.bash setupTermuxArch setupTermuxArch.bash setupTermuxArch.sh printoutstatements.bash)
+for ETASTRIP in ${TASTRIP[@]}
+do
+# delete ALL blank lines from a file (same as "grep '.' ")
+sed -i '/^$/d' $ETASTRIP 
+# delete lines that contain a pattern
+sed -i '/^# /d' $ETASTRIP 
+# delete from a pattern in lines
+sed -i 's/^# .*$//g' $ETASTRIP 
+done
 # generate checksum from multiple files 
 sha512sum {*sh,LICENSE,setupTermuxArch} > termuxarchchecksum.sha512 && sha512sum -c termuxarchchecksum.sha512
 tar zcf ../../setupTermuxArch.tar.gz *

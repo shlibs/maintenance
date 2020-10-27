@@ -34,6 +34,8 @@ trap '_STGNTRPERROR_ $LINENO $BASH_COMMAND $?' ERR
 trap _STGNTRPEXIT_ EXIT
 trap _STGNTRPSIGNAL_ HUP INT TERM
 trap _STGNTRPQUIT_ QUIT
+sed -i 's/^[ \t]*//;s/[ \t]*$//' *sh
+sed -i 's/^[ \t]*//;s/[ \t]*$//' setupTermuxArch
 sed -i "s/^VERSIONID=.*/VERSIONID=$(head -n 1 .conf/VERSIONID )/g" setupTermuxArch
 sed -i "s/^FLHDR1\[5\]=.*/FLHDR1\[5\]=\"VERSIONID=$(head -n 1 .conf/VERSIONID)\"/g" printoutstatements.bash
 GDIR="$$$RANDOM$PPID$SECONDS"

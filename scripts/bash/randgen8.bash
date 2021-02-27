@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
-# copyright 2017-2020, all rights reserved by SDRausty; see LICENSE
+# copyright 2017-2021, all rights reserved by SDRausty; see LICENSE
 # generate eight digit random numbers to create uniq strings
 ##############################################################################
 set -eu
 declare ONESA
 declare STIME
-_GENRAND_() {	# if readable then run either _RANDUUID_ or _RANDDATE_
-	[[ -r /proc/sys/kernel/random/uuid ]]&&_RANDUUID_||_RANDDATE_
+_GENRAND_() {
+	if [[ -r /proc/sys/kernel/random/uuid ]]
+	then
+		_RANDUUID_
+	else
+		_RANDDATE_
+	fi
  	printf "\\e[1;7;38;5;0m%s\\e[0m" "$STIME"
  	while true
  	do
@@ -35,7 +40,7 @@ _RANDDATE_() {	# function _RANDDATE_
  		STIME="${ONESA::8}"
 	}
 	# some busybox date commands lack the nanosecond option
-	[[ "$(date +%N 2>/dev/null)" ]]&&_RANDNDATE_||_RANDSHUF_
+	[[ "$(date +%N 2>/dev/null)" ]] && _RANDNDATE_ || _RANDSHUF_
 }
 _RANDUUID_() {	# function _RANDUUID_
 	STIME="$(cat /proc/sys/kernel/random/uuid)"

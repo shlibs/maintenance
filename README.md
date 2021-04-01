@@ -1,4 +1,4 @@
-## [maintenance](https://shlibs.github.io/maintenance/) 
+## [maintenance](https://shlibs.github.io/maintenance/)
 
 # [maintenance](https://github.com/shlibs/maintenance/blob/master/README.md)
 

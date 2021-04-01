@@ -22,20 +22,20 @@ _RANDDATE_() {	# function _RANDDATE_
 	_RANDNDATE_() {	# nested function _RANDNDATE_
 		ON="$(date +%N)"
 		ON="${ON: -2}"
-		sleep 0."$(shuf -i 0-9999 -n 1)" 
+		sleep 0."$(shuf -i 0-9999 -n 1)"
 		ONE="$(date +%N)"
 		ONE="${ONE: -2}"
-		sleep 0."$(shuf -i 0-9999 -n 1)" 
+		sleep 0."$(shuf -i 0-9999 -n 1)"
 		ONES="$(date +%N)"
 		ONES="${ONES: -2}"
-		sleep 0."$(shuf -i 0-9999 -n 1)" 
+		sleep 0."$(shuf -i 0-9999 -n 1)"
 		ONESA="$(date +%N)"
 		ONESA="${ONESA: -2}"
 		ONESA="$ON$ONE$ONES$ONESA"
  		STIME="$ONESA"
 	}
 	_RANDSHUF_() {	# nested function _RANDSHUF_
-		ONESA="$(shuf -i 0-99999999 -n 1)" 
+		ONESA="$(shuf -i 0-99999999 -n 1)"
 		[[ "${#ONESA}" -lt 8 ]]&&TONESA="$ONESA"&&_RANDSHUF_&&ONESA="$ONESA$TONESA"
  		STIME="${ONESA::8}"
 	}

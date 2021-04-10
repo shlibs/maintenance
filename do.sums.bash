@@ -43,7 +43,7 @@ do
 	printf "%s\\n" "Creating $SCHECK file..."
 	for FILE in $FINDLST
 	do
-		sed -i 's/ *$//g' "$FILE"
+		#sed -i 's/ *$//g' "$FILE"
 		$SCHECK "$FILE" >> ${SCHECK::-3}.sum
 	done
 done

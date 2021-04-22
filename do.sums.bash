@@ -43,8 +43,13 @@ do
 	printf "%s\\n" "Creating $SCHECK file..."
 	for FILE in $FINDLST
 	do
-		#sed -i 's/ *$//g' "$FILE"
-		$SCHECK "$FILE" >> ${SCHECK::-3}.sum
+		if [[ "$FILE" == *sh* ]] || [[ "$FILE" == *md* ]]
+		then
+			sed -i 's/ *$//g' "$FILE"
+			$SCHECK "$FILE" >> ${SCHECK::-3}.sum
+		else
+			$SCHECK "$FILE" >> ${SCHECK::-3}.sum
+		fi
 	done
 done
 chmod 400 ${SCHECK::-3}.sum

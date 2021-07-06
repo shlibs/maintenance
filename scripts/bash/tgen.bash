@@ -41,12 +41,12 @@ sed -i "s/^VERSIONID=.*/VERSIONID=$GDIR/g" setupTermuxArch
 sed -i "s/^FLHDR1\[5\]=.*/FLHDR1\[5\]=\"VERSIONID=$(head -n 1 .conf/VERSIONID)\"/g" printoutstatements.bash
 [ -f setupTermuxArchConfigs.bash ] && rm -f setupTermuxArchConfigs.bash
 [ $(find . -name "*.swp") ] && rm -f "*.swp"
-mkdir -p gen/"$GDIR"
+mkdir -p "gen/$GDIR"
 # copy multiple files to one destination directory
 cp {LICENSE,archlinuxconfig.bash,espritfunctions.bash,getimagefunctions.bash,knownconfigurations.bash,maintenanceroutines.bash,necessaryfunctions.bash,setupTermuxArch,setupTermuxArch.bash,setupTermuxArch.sh,printoutstatements.bash} gen/"$GDIR"
 # copy one file to multiple files
 printf "setupTermuxArch.bash setupTermuxArch.sh" | xargs -n 1 cp setupTermuxArch
-cd gen/"$GDIR"
+cd "gen/$GDIR"
 # strip comments from multiple files
 TASTRIP=(archlinuxconfig.bash espritfunctions.bash getimagefunctions.bash knownconfigurations.bash maintenanceroutines.bash necessaryfunctions.bash setupTermuxArch setupTermuxArch.bash setupTermuxArch.sh printoutstatements.bash)
 for ETASTRIP in ${TASTRIP[@]}

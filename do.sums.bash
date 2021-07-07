@@ -61,7 +61,10 @@ done
 git add . || (printf "%s\\n" "Cannot git add in directory ${PWD##*/} : EXITING... : " && exit)
 WPWD="$PWD"
 _IFBINEXT_() {
-	[ -d "$HOME/bin" ] && cd "$HOME/bin" && "curl -OL https://raw.githubusercontent.com/BuildAPKs/maintenance.BuildAPKs/master/$SCMD" && chmod 700 "$SCMD" ; cd "$WPWD" ; find "$WPWD" -type f -name "*.swp" -delete
+	[ -d "$HOME/bin" ] && cd "$HOME/bin" && "curl -OL https://raw.githubusercontent.com/BuildAPKs/maintenance.BuildAPKs/master/$SCMD" && chmod 700 "$SCMD" ; cd "$WPWD" ;ls -al; find "$WPWD" -type f -name "*.swp" -delete
+	pwd
+	ls -al
+	exit
 }
 SCMD="sn.sh"
 command -v "$SCMD" && echo found command "$SCMD" || (printf "\\e[1;38;5;124mCommand \\e[1;38;5;148m%s\\e[1;38;5;124m not found: \\e[1;38;5;150mContinuing...\\n" "'$SCMD'" ; _IFBINEXT_ ; printf "\\e[0m")

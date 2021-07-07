@@ -6,6 +6,7 @@
 # To check the files use; sha512sum -c sha512.sum
 #####################################################################
 set -euo pipefail
+find . -type f -name "*.swp" -delete
 printf "%s\\n" "Creating checksum file and pushing commit from directory ${PWD##*/} : "
 _GITCOMMIT_() {
 	git commit -m "$SN" || (printf "%s\\n" "Cannot git commit from directory ${PWD##*/} : EXITING... : " && exit)
@@ -61,10 +62,7 @@ done
 git add . || (printf "%s\\n" "Cannot git add in directory ${PWD##*/} : EXITING... : " && exit)
 WPWD="$PWD"
 _IFBINEXT_() {
-	[ -d "$HOME/bin" ] && cd "$HOME/bin" && "curl -OL https://raw.githubusercontent.com/BuildAPKs/maintenance.BuildAPKs/master/$SCMD" && chmod 700 "$SCMD" ; cd "$WPWD" ;ls -al; find "$WPWD" -type f -name "*.swp" -delete
-	pwd
-	ls -al
-	exit
+	[ -d "$HOME/bin" ] && cd "$HOME/bin" && "curl -OL https://raw.githubusercontent.com/BuildAPKs/maintenance.BuildAPKs/master/$SCMD" && chmod 700 "$SCMD" ; cd "$WPWD"
 }
 SCMD="sn.sh"
 command -v "$SCMD" && echo found command "$SCMD" || (printf "\\e[1;38;5;124mCommand \\e[1;38;5;148m%s\\e[1;38;5;124m not found: \\e[1;38;5;150mContinuing...\\n" "'$SCMD'" ; _IFBINEXT_ ; printf "\\e[0m")
